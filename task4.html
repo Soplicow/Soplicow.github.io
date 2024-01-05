@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+    body{
+        background-color: beige;
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    img {
+        width: 100%;
+        max-width: 50vw;
+        height: auto;
+        margin-left: 25%;
+    }
+
+
+</style>
+
+<head>
+    <title>Task 4: Network and Transport Layers</title>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Network and Transport Layers</h1>
+        <h2>1. Theoretical part</h2>
+            <div>
+                <h3>1.1. Describe the following: TCP protocol, UDP protocol, TCP protocol parameters, UDP protocol parameters, TCP connection, three way handshake, connection establishment, connection release, ports</h3>
+                <div>
+                    <h4>TCP protocol</h4>
+                        <p>TCP (Transmission Control Protocol) is a vital part of internet communication, ensuring reliable data transfer. It starts by establishing a connection between sender and receiver through a three-way handshake. Once connected, TCP guarantees reliable data delivery by assigning sequence numbers, acknowledging received data, and retransmitting lost packets.</p>
+                        
+                        <p>TCP manages data flow to avoid overwhelming the receiver and adjusts transmission rates to prevent network congestion. It also enables simultaneous two-way data transfer, detects errors using checksums, and segments data for efficient transmission and reassembly at the destination.</p>
+
+                    <h4>UDP protocol</h4>
+                        <p>UDP, or User Datagram Protocol, operates within the Internet Protocol Suite, much like TCP, but with distinct differences. It's a connectionless and simpler protocol, sacrificing some reliability for speed.</p>
+
+                        <h5>Key aspects of UDP:</h5>
+
+                        <ol>
+                            <li>Connectionless Nature: <br>
+                                Unlike TCP, UDP doesn't establish connections before data transfer. It sends packets, or datagrams, without a preliminary setup.</li>
+                            <li>Unreliable Data Transmission: <br>
+                                UDP doesn't guarantee delivery or sequence of packets. It's faster but doesn't confirm if data reaches its destination.</li>
+                            <li>Minimal Overhead: <br>
+                                With fewer features compared to TCP, UDP has less control mechanisms, resulting in faster transmission but without error correction or retransmission capabilities.</li>
+                            <li>Straightforward and Fast: <br>
+                                UDP's simplicity makes it efficient for scenarios prioritizing speed over reliability, such as real-time applications like video streaming or online gaming.</li>
+                            <li>Support for Broadcasting and Multicasting: <br>
+                                UDP allows sending messages to multiple recipients simultaneously (broadcasting) or to specific groups (multicasting).</li>
+                            <li>Usage in Time-Critical Applications: <br>
+                                Applications needing real-time data transfer, where some data loss is tolerable, favor UDP due to its speed and lower latency.</li>
+                        </ol>
+                    
+                    <h4>TCP protocol parameters</h4>
+                        <p>TCP (Transmission Control Protocol) operates using various parameters and flags that help control and manage the transmission of data between devices over a network. These parameters and flags are crucial for establishing connections, ensuring reliable data transfer, managing flow and congestion, and maintaining overall communication integrity.</p>
+
+                        <h5>Key TCP Protocol Parameters:</h5>
+
+                        <ol>
+                            <li>Sequence Numbers: <br>
+
+                                Each segment of data transmitted via TCP is assigned a sequence number. These numbers are used to order segments at the receiving end, ensuring data arrives in the correct order.
+                            </li>
+                            <li>Acknowledgment Numbers: <br>
+
+                                TCP relies on acknowledgment numbers to confirm the successful receipt of data segments. Upon receiving a segment, the receiver acknowledges it by sending an acknowledgment number back to the sender.
+                            </li>
+                            <li>Window Size: <br>
+
+                                TCP utilizes a sliding window mechanism to manage the flow of data between sender and receiver. The window size determines the amount of unacknowledged data that can be transmitted before waiting for acknowledgments.
+                            </li>
+                            <li>Flags: <br>
+
+                                TCP uses various control flags in its header to manage communication:
+                                    <ul>
+                                        <li>SYN (Synchronize): Initiates a connection and synchronizes sequence numbers.</li>
+                                        <li>ACK (Acknowledgment): Acknowledges the receipt of data.</li>
+                                        <li>PSH (Push): Indicates the immediate delivery of data to the receiving application.</li>
+                                        <li>RST (Reset): Resets the connection.</li>
+                                        <li>FIN (Finish): Signals the termination of the connection.</li>
+                                    </ul>
+                            </li>
+                            <li>Checksum: <br>
+
+                                TCP calculates a checksum for error detection in transmitted data. This checksum helps verify the integrity of received segments by detecting any data corruption during transmission.
+                            </li>
+                            <li>Maximum Segment Size (MSS): <br>
+
+                                It determines the maximum size of a TCP segment that can be sent in a single transmission. MSS value negotiation occurs during the initial handshake to ensure efficient data transfer without fragmentation.
+                            </li>
+                            <li>Congestion Control Parameters: <br>
+
+                                TCP implements various congestion control mechanisms such as slow start, congestion avoidance, and fast retransmit. These parameters regulate the transmission rate based on network congestion signals like packet loss or delays.
+                            </li>
+                        </ol>
+                        
+                    <h4>UDP protocol parameters</h4>
+                    <p>UDP (User Datagram Protocol) is a simpler protocol compared to TCP and has fewer parameters and control mechanisms. Unlike TCP, UDP is connectionless and does not provide the same level of reliability and error handling. However, UDP still utilizes certain parameters to manage data transmission and facilitate communication.</p>
+                    
+                    <h5>Key Parameters of UDP:</h5>
+                    <ol>
+                        <li>Source Port and Destination Port: <br>
+
+                            UDP segments contain source and destination port numbers to identify the sending and receiving applications on devices. Port numbers help direct data to the appropriate application.
+                        </li>
+                        <li>Length: <br>
+
+                            UDP includes a length field indicating the length of the UDP header and the encapsulated data in bytes. This total length covers the UDP header and the payload.
+                        </li>
+                        <li>Checksum: <br>
+
+                            UDP includes a checksum field used for error detection in the UDP segment. The checksum verifies the integrity of the UDP header and data, helping detect errors during transmission. However, UDP's checksum is optional and often is set to 0 if unused.
+                        </li>
+                        <li>Data Payload: <br>
+
+                            UDP carries application data within its payload. Unlike TCP, UDP does not segment or reassemble data; it sends the data as-is in separate datagrams.
+                        </li>
+                        <li>Minimal Overhead: <br>
+
+                            Unlike TCP, UDP has minimal overhead, consisting only of essential fields required for transmission, contributing to faster data transfer
+                        </li>
+                    </ol>
+
+                    <h4>TCP connection, three way handshake, connection establishment, connection release</h4>
+                        <p>A TCP (Transmission Control Protocol) connection refers to the establishment of a communication link between two networked devices, allowing reliable data exchange. The process of establishing and terminating a TCP connection involves several steps:</p>
+
+                    <h5>TCP Connection Establishment (Three-Way Handshake):</h5>
+                        <ol>
+                            <li>SYN (Synchronize): <br>
+
+                                The initiating device (client) sends a SYN packet to the receiving device (server) to begin the connection establishment. This packet contains a sequence number to synchronize communication.
+                            </li>
+                            <li>SYN-ACK (Synchronize-Acknowledge): <br>
+
+                                The receiving device acknowledges the SYN packet by sending a SYN-ACK packet back to the client. This packet includes an acknowledgment of the client's sequence number and its own sequence number.
+                            </li>
+                            <li>ACK (Acknowledge): <br>
+
+                                Finally, the client acknowledges the server's SYN-ACK packet by sending an ACK packet back. This packet acknowledges the server's sequence number, and the connection is established. Both devices can now begin transmitting data.
+                            </li>
+                        </ol>
+
+                    <h5>Data Transfer:</h5>
+                        <p>Once the TCP connection is established, data transmission can occur in both directions. TCP ensures reliable and ordered delivery of data packets. Each packet includes sequence numbers to arrange them in the correct order at the receiving end.</p>
+
+                    <h5>TCP Connection Termination:</h5>
+                        <p>When the communication is complete or one of the devices wishes to terminate the connection:</p>
+
+                        <ol>
+                            <li>Initiating Termination: <br>
+
+                                One device sends a FIN (Finish) packet to signal its intention to terminate the connection.
+                            </li>
+                            <li>Acknowledgment of Termination: <br>
+
+                                The other device acknowledges the FIN packet with an ACK, signifying its acknowledgment of the termination request.
+                            </li>
+                            <li>Response FIN: <br>
+
+                                The acknowledging device sends its own FIN packet to initiate its termination.
+                            </li>
+                            <li>Final Acknowledgment: <br>
+
+                                The initiating device acknowledges the FIN from the other device.
+                            </li>
+                        </ol>
+
+                        <h5>Closure and Release:</h5>
+                            <p>Once both devices have acknowledged the termination, the TCP connection is fully closed and released. Both sides release the resources associated with the connection.</p>
+
+                    <h4>Ports</h4>
+                        <p>In computer networking, ports are endpoints used for communication between devices over a network. They are part of the transport layer in the OSI (Open Systems Interconnection) model and play a crucial role in facilitating data transfer between applications or services.</p>
+
+                    <h5>Key Points about Ports:</h5>
+                        <ol>
+                            <li>Addressing Endpoints: <br>
+
+                                Ports are used to address specific services or applications running on a device within a network. They enable multiple services to operate simultaneously on a single device.
+                            </li>
+                            <li>Port Numbers: <br>
+
+                                Ports are identified by numbers ranging from 0 to 65535. Well-known ports (0-1023) are reserved for standard services like HTTP (port 80), FTP (port 21), SSH (port 22), etc. Registered ports (1024-49151) are for user- or vendor-specific services, while dynamic or private ports (49152-65535) are used for temporary connections.
+                            </li>
+                            <li>Transport Layer Protocols: <br>
+
+                                Ports work in conjunction with transport layer protocols like TCP (Transmission Control Protocol) and UDP (User Datagram Protocol). TCP and UDP use ports to direct incoming data packets to the appropriate application or service.
+                            </li>
+                            <li>Port Pairing with IP Addresses: <br>
+
+                                A combination of IP address and port number creates a unique address called a socket. This pairing ensures that data reaches the correct application on a specific device.
+                            </li>
+                            <li>Simultaneous Services: <br>
+
+                                Ports allow multiple services or applications to operate concurrently on a single device by using different port numbers for each service. For instance, a web server might use port 80 for HTTP and port 443 for HTTPS simultaneously.
+                            </li>
+                            <li>Firewalls and Security: <br>
+
+                                Firewalls use ports to regulate incoming and outgoing network traffic. By opening or closing specific ports, firewalls can control which services are accessible from the outside network, enhancing security.
+                            </li>
+                            <li>Dynamic Port Allocation: <br>
+
+                                When a client initiates a connection to a server, it typically uses an ephemeral or dynamic port number assigned by the operating system. This port serves as the return address for the server's response.
+                            </li>
+                        </ol>
+                </div>
+            </div>
+
+        <h2>2. Practical part</h2>
+            <div>
+                <h3>2.1. Enter www.google.com webpage using preferred browser. Use netstat and Wireshark to identify ports which are used for data transmission (local and remote port numbers). Finish the connection (close the browser) and check local port status.</h3>
+                    <img src="source/netstat google.png" alt="">
+                    <img src="source/wireshark google.png" alt="">
+                    <img src="source/netstat local port status.png" alt="">
+
+                <h3>2.2. Copy the file from your local host to studife.it.p.lodz.pl server using ftp protocol. Use netstat and Wireshark to identify ports which are used for data transmission (local and remote port numbers). Finish the connection and check local port status.</h3>
+                    <img src="source/netstat FTP.png" alt="">
+                    <img src="source/wireshark FTP.png" alt="">
+                    <img src="source/Wireshark FTP exit.png" alt="">
+
+                <h3>2.3. Copy the file from your local host to studife.it.p.lodz.pl server using scp or sftp protocol. Use netstat and Wireshark to identify ports which are used for data transmission (local and remote port numbers). Finish the connection and check local port status.</h3>
+                    <img src="source/SFTP netstat.png" alt="">
+                    <img src="source/SFTP wireshark.png" alt="">
+                    <img src="source/SFTP local port status.png" alt="">
+            </div>
+
+        <div>
+            <a href="..">http://studife.it.p.lodz.pl/~ife23_10/</a>
+        </div>
+</body>
+</html>
